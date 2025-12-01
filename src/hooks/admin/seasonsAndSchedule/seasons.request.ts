@@ -6,7 +6,7 @@ const API_BASE = "http://localhost:8000/admin/horario";
 
 export const fetchGetAllSeasons = async (): Promise<ReturnSeasons[]> => {
     try {
-        const url = `${API_BASE}/obtener-temporadas`;
+        const url = `${API_BASE}/obtener-temporadas-all`;
         const { data } = await axios.get(url);
         if (data && data.data) {
             return data.data;
