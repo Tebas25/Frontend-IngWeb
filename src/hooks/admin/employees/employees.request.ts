@@ -1,7 +1,7 @@
 import axios from "axios";
 import type { Employee, NewEmployee } from "../admin";
 
-const API_BASE = "http://localhost:8000/admin/empleados";
+const API_BASE = "https://tomas-be.totemdev.pro/admin/empleados";
 
 export const createEmployee = async (employee: NewEmployee) => {
     const response = await axios.post(`${API_BASE}/ingresar-empleado`, employee);

@@ -28,21 +28,17 @@ const ViewEmployeePage = () => {
 
     const handleGenerateReport = async () => {
         if (!startDate) {
-            toast.warning("Por favor selecciona una fecha");
-            return;
-        }
-        if (!cedula) {
-            toast.error("No se encontró la cédula del empleado");
-            return;
-        }
+        toast.warning("Por favor selecciona una fecha");
+        return;
+    }
+    const success = await fetchReporte({
+        Cedula: cedula || "",
+        Fecha_inicio: startDate
+    });
 
-        console.log("Generando reporte para:", { cedula, startDate });
-
-        await fetchReporte({
-            Cedula: cedula,
-            Fecha_inicio: startDate
-        });
+    if (success) {
         setIsReportModalOpen(true);
+    }
     };
 
     const closeReportModal = () => {

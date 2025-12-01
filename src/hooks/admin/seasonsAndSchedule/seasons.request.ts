@@ -2,7 +2,7 @@ import axios from "axios";
 import type { ReturnSeasons, Season } from "../admin";
 import type  {AssingSchedule}  from "./schedule";
 
-const API_BASE = "http://localhost:8000/admin/horario";
+const API_BASE = "https://tomas-be.totemdev.pro/admin/horario";
 
 export const fetchGetAllSeasons = async (): Promise<ReturnSeasons[]> => {
     try {
