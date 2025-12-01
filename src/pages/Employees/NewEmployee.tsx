@@ -64,26 +64,28 @@ export const EmployeeForm = ({ hookForm, onSubmit, loading, onCancel }: Employee
 
                 <div className="form-field">
                     <label>Área *</label>
-                    <input
-                        type="text"
-                        {...register('Area', { 
-                            required: 'El área es requerida'
-                        })}
-                        placeholder="Ingrese el área"
-                    />
-                    {errors.Area && <span className="error">{errors.Area.message}</span>}
+                    <select 
+                        {...register('Area', {required: 'El área es requerida'})}
+                    >
+                        <option value="Foods">Foods</option>
+                        <option value="House keeping">House keeping</option>
+                        <option value="Rides">Rides</option>
+                        <option value="Maintainance">Maintainance</option>
+                        <option value="Lifeguard">Lifeguard</option>
+                        <option value="Games">Games</option>
+                    </select>
                 </div>
 
                 <div className="form-field full-width">
                     <label>Cargo *</label>
-                    <input
-                        type="text"
-                        {...register('Cargo', { 
-                            required: 'El cargo es requerido'
-                        })}
-                        placeholder="Ingrese el cargo"
-                    />
-                    {errors.Cargo && <span className="error">{errors.Cargo.message}</span>}
+                    <select 
+                        {...register('Cargo', {required: 'El cargo es requerido'})}
+                    >
+                        <option value="Manager">Manager</option>
+                        <option value="Supervisor">Supervisor</option>
+                        <option value="Staff">Staff</option>
+                        <option value="Area Supervisor">Area Supervisor</option>
+                    </select>
                 </div>
             </div>
 

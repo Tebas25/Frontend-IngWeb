@@ -51,3 +51,15 @@ export const fetchEmployeeByCedula = async (cedula: string): Promise<Employee | 
         throw new Error(error.response?.data?.message || error.message || "Error al buscar empleado");
     }
 }
+
+export const GetEmployeeSalary = async (cedula: string): Promise<number> => {
+    try{
+        const url = `${API_BASE}/obtener-salario`;
+        const { data } = await axios.post(url, null, {
+            params: { cedula }
+        });
+        return data.salario|| null;
+    } catch (error: any) {
+        throw new Error(error.response?.daya.message || error.message)
+    }
+} 

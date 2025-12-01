@@ -1,22 +1,23 @@
-import { useCallback, useState } from "react";
+// useEmployee.ts
+import { useState, useEffect, useCallback } from "react";
 import type { Employee } from "../admin";
 import { fetchEmployeeByCedula } from "./employees.request";
 
-interface ReturnUseEmployeeByCedula {
+interface UseEmployeeReturn {
     employee: Employee | null;
     loadingEmployee: boolean;
     error: string | null;
-    refetchEmployee: (cedula: string) => Promise<void>;
-    clearEmployee: () => void;
+    rechargeEmployee: () => Promise<void>;
 }
 
-export const useEmployeeByCedula = (): ReturnUseEmployeeByCedula => {
-    const [loadingEmployee, setLoadingEmployee] = useState(false);
+export const useEmployee = (cedula?: string): UseEmployeeReturn => {
     const [employee, setEmployee] = useState<Employee | null>(null);
+    const [loadingEmployee, setLoadingEmployee] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
-    const getEmployee = useCallback(async (cedula: string) => {
-        if (!cedula.trim()) {
+    const getEmployee = useCallback(async (employeeCedula: string) => {
+        
+        if (!employeeCedula.trim()) {
             setEmployee(null);
             setError("La cédula no puede estar vacía");
             return;
@@ -26,7 +27,7 @@ export const useEmployeeByCedula = (): ReturnUseEmployeeByCedula => {
         setError(null);
         
         try {
-            const result = await fetchEmployeeByCedula(cedula.trim());
+            const result = await fetchEmployeeByCedula(employeeCedula.trim());
             setEmployee(result);
             
             if (!result) {
@@ -40,20 +41,22 @@ export const useEmployeeByCedula = (): ReturnUseEmployeeByCedula => {
         }
     }, []);
 
-    const refetchEmployee = async (cedula: string) => {
-        await getEmployee(cedula);
-    }
+    const rechargeEmployee = useCallback(async () => {
+        if (cedula) {
+            await getEmployee(cedula);
+        }
+    }, [cedula, getEmployee]);
 
-    const clearEmployee = useCallback(() => {
-        setEmployee(null);
-        setError(null);
-    }, []);
+    useEffect(() => {
+        if (cedula) {
+            getEmployee(cedula);
+        }
+    }, [cedula, getEmployee]);
 
     return {
         employee,
         loadingEmployee,
         error,
-        refetchEmployee,
-        clearEmployee,
+        rechargeEmployee,
     };
-}
+};

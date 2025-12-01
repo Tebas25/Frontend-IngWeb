@@ -3,11 +3,15 @@ import Layout from "../../components/layout.component";
 import { useAdmin } from "../../hooks/admin/employees/useAdmin";
 import { useAllEmployees } from "../../hooks/admin/employees/useAllEmployees";
 import { useDeleteEmployee } from "../../hooks/admin/employees/useDeleteEmployee";
-import { useState } from "react";
+import { useState, type JSX } from "react";
 import Modal from "../../components/modal";
 import { EmployeeForm } from "./NewEmployee";
 import { DeleteEmployeeForm } from "./DeleteEmployeePage";
 import "../../styles/employee.css";
+import Loading from "../../components/Loading.component";
+import { DataTable } from 'primereact/datatable';
+import { Column } from "primereact/column";
+import { Link } from "react-router-dom";
 
 const EmployeePage = () => {
     const { hookForm, handleCreateEmployee, loadingCreateEmployee } = useAdmin();
@@ -45,9 +49,6 @@ const EmployeePage = () => {
         if (success) {
             closeDeleteModal();
             refetchEmployees();
-            alert('Empleado eliminado exitosamente');
-        } else {
-            alert('Error al eliminar el empleado. Verifique la cédula.');
         }
         return success;
     };
@@ -64,62 +65,51 @@ const EmployeePage = () => {
                 </div>
                 <div className="button-group">
                     <button
-                        onClick={openDeleteModal}
-                        className="btn-delete-employee"
-                    >
-                        🗑️ Eliminar Empleado
-                    </button>
-                    <button
                         onClick={openCreateModal}
                         className="btn-new-employee"
                     >
                         + Nuevo Empleado
                     </button>
+                    <button
+                        onClick={openDeleteModal}
+                        className="btn-delete-employee"
+                    >
+                        🗑️ Eliminar Empleado
+                    </button>
                 </div>
             </div>
 
             <div className="employee-content">
-                {loadingEmployees ? (
-                    <div className="loading-container">
-                        <div className="loading-spinner"></div>
-                        <p>Cargando empleados...</p>
-                    </div>
-                ) : (
-                    <div className="table-container">
-                        <table className="employees-table">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Nombre</th>
-                                    <th>Apellido</th>
-                                    <th>Cédula</th>
-                                    <th>Área</th>
-                                    <th>Cargo</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {employees.length === 0 ? (
-                                    <tr>
-                                        <td colSpan={6} className="no-data">
-                                            No hay empleados registrados
-                                        </td>
-                                    </tr>
-                                ) : (
-                                    employees.map((employee) => (
-                                        <tr key={employee.Empleado_id}>
-                                            <td>{employee.Empleado_id}</td>
-                                            <td>{employee.Nombre}</td>
-                                            <td>{employee.Apellido}</td>
-                                            <td>{employee.Cedula}</td>
-                                            <td>{employee.Area}</td>
-                                            <td>{employee.Cargo}</td>
-                                        </tr>
-                                    ))
-                                )}
-                            </tbody>
-                        </table>
-                    </div>
-                )}
+            {loadingEmployees ? (
+                <div className="loading-container">
+                    <Loading size="large"/>
+                </div>
+            ) : (
+                <div className="table-wrapper">
+                    <DataTable 
+                        value={employees} 
+                        emptyMessage="No se encontraron empleados"
+                        className="employees-datatable compact-table"
+                    >
+                        <Column
+                            field="Cedula"
+                            header="Documento de Identidad"
+                            body={({ Empleado_id, Cedula }): JSX.Element => (
+                                <Link
+                                    to={`/view-employee/${Empleado_id}?cedula=${Cedula}`}
+                                    className="text-underline-blue"
+                                >
+                                    {Cedula}
+                                </Link>
+                            )}
+                        />
+                        <Column field="Nombre" header="Nombre" />
+                        <Column field="Apellido" header="Apellido" /> 
+                        <Column field="Area" header="Área" />
+                        <Column field="Cargo" header="Cargo" />
+                    </DataTable>
+                </div>
+            )}
             </div>
 
             {/* Modal para crear empleado */}

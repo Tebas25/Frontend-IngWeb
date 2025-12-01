@@ -4,6 +4,7 @@ import ProtectedRoute from "./ProtectedRoutes";
 import HomePage from "../pages/HomePage";
 import EmployeePage from "../pages/Employees/EmployeePage";
 import AdministrationPage from "../pages/Administration/AdministrationPage";
+import ViewEmployee from "../pages/Employees/ViewEmployee.page";
 
 const AppRoutes = () => {
 
@@ -31,6 +32,15 @@ const AppRoutes = () => {
         element={
           <ProtectedRoute>
             <AdministrationPage />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/view-employee/:Empleado_id"
+        element={
+          <ProtectedRoute>
+            <ViewEmployee />
           </ProtectedRoute>
         }
       />

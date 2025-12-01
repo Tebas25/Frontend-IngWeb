@@ -1,6 +1,7 @@
 // components/employee/DeleteEmployeeForm.tsx
 import { useState, useEffect } from 'react';
 import { useEmployeeByCedula } from '../../hooks/admin/employees/useEmployeeByCedula';
+import Loading from '../../components/Loading.component';
 
 interface DeleteEmployeeFormProps {
   onDelete: (cedula: string) => Promise<boolean>;
@@ -66,7 +67,6 @@ export const DeleteEmployeeForm = ({
 
   const handleCedulaChange = (value: string) => {
     setCedula(value);
-    // Limpiar la búsqueda si cambia la cédula
     if (value !== searchedCedula) {
       clearEmployee();
     }
@@ -101,10 +101,7 @@ export const DeleteEmployeeForm = ({
 
       {/* Tabla de información del empleado */}
       {loadingEmployee && (
-        <div className="loading-container">
-          <div className="loading-spinner"></div>
-          <p>Buscando empleado...</p>
-        </div>
+        <Loading size="small" />
       )}
 
       {error && (
@@ -140,9 +137,6 @@ export const DeleteEmployeeForm = ({
               </tbody>
             </table>
           </div>
-          <p className="confirmation-text">
-            ¿Está seguro que desea eliminar a este empleado?
-          </p>
         </div>
       )}
 

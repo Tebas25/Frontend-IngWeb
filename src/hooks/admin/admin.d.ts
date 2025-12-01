@@ -28,3 +28,9 @@ export interface Season {
     fecha_final: string;
     multiplicador: number;
 }
+
+export interface NewUser {
+    username: string;
+    email: string;
+    password: string;
+}

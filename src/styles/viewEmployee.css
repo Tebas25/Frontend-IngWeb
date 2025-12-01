@@ -1,0 +1,308 @@
+/* View Employee Page Styles */
+.employee-profile {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Profile Header */
+.profile-header {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1.5rem;
+}
+
+.employee-main-info {
+    margin-bottom: 1.5rem;
+}
+
+.employee-name {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #333;
+    margin: 0 0 0.5rem 0;
+}
+
+.employee-area {
+    font-size: 1.2rem;
+    color: #666;
+    font-weight: 500;
+}
+
+.employee-details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.detail-item:last-child {
+    border-bottom: none;
+}
+
+.detail-label {
+    font-weight: 500;
+    color: #666;
+}
+
+.detail-value {
+    font-weight: 600;
+    color: #333;
+}
+
+.salary {
+    color: #4CAF50;
+    font-size: 1.1rem;
+}
+
+/* Sections */
+.section {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1.5rem;
+}
+
+.section-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #333;
+    margin: 0 0 1.5rem 0;
+}
+
+/* Paycheck Section */
+.paycheck-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+}
+
+.paycheck-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #4CAF50;
+}
+
+.paycheck-label {
+    font-weight: 500;
+    color: #666;
+}
+
+.paycheck-value {
+    font-weight: 600;
+    color: #333;
+}
+
+.amount-due {
+    color: #4CAF50;
+    font-size: 1.1rem;
+}
+
+/* Report Section */
+.report-controls {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-end;
+}
+
+.date-inputs {
+    display: flex;
+    gap: 1rem;
+    flex: 1;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.input-label {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: #333;
+    font-size: 0.9rem;
+}
+
+.date-input {
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    font-family: inherit;
+    transition: border-color 0.2s;
+}
+
+.date-input:focus {
+    outline: none;
+    border-color: #4CAF50;
+    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.1);
+}
+
+/* Buttons */
+.btn-generate-report {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: all 0.2s;
+    height: fit-content;
+}
+
+.btn-generate-report:hover:not(:disabled) {
+    background: #0056b3;
+    transform: translateY(-1px);
+}
+
+.btn-generate-report:disabled {
+    background: #6c757d;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.btn-manage-schedule {
+    background: #ffc107;
+    color: #333;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.2s;
+    width: 100%;
+    max-width: 300px;
+}
+
+.btn-manage-schedule:hover {
+    background: #e0a800;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
+}
+
+/* Actions Section */
+.actions-section {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+/* Loading and Error States */
+.loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+}
+
+.error-container {
+    text-align: center;
+    padding: 3rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+.error-container h2 {
+    color: #dc3545;
+    margin-bottom: 1rem;
+}
+
+.error-container p {
+    color: #666;
+    margin-bottom: 1.5rem;
+}
+
+.btn-retry {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.btn-retry:hover {
+    background: #0056b3;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .employee-profile {
+        padding: 1rem;
+    }
+
+    .profile-header {
+        padding: 1.5rem;
+    }
+
+    .employee-name {
+        font-size: 1.5rem;
+    }
+
+    .employee-details-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .report-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .date-inputs {
+        flex-direction: column;
+    }
+
+    .paycheck-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .paycheck-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .section {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .employee-profile {
+        padding: 0.5rem;
+    }
+
+    .profile-header {
+        padding: 1rem;
+    }
+
+    .section {
+        padding: 1rem;
+    }
+
+    .employee-name {
+        font-size: 1.3rem;
+    }
+}
