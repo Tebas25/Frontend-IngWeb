@@ -1,0 +1,9 @@
+import axios from "axios"
+import type { ObtenerReporte, ReporteGeneral } from "./report"
+
+const API_BASE = "http://localhost:8000/core/generate-report"
+
+export const getReport = async(employee: ObtenerReporte) => {
+    const response = await axios.post<ReporteGeneral>(`${API_BASE}/obtener-reporte`, employee)
+    return response.data;
+}

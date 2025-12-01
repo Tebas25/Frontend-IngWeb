@@ -2,6 +2,8 @@
 import { useState, useEffect } from 'react';
 import { useEmployeeByCedula } from '../../hooks/admin/employees/useEmployeeByCedula';
 import Loading from '../../components/Loading.component';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
 
 interface DeleteEmployeeFormProps {
   onDelete: (cedula: string) => Promise<boolean>;
@@ -114,28 +116,17 @@ export const DeleteEmployeeForm = ({
         <div className="employee-preview">
           <h4>Empleado encontrado:</h4>
           <div className="preview-table">
-            <table className="employees-table">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Nombre</th>
-                  <th>Apellido</th>
-                  <th>Cédula</th>
-                  <th>Área</th>
-                  <th>Cargo</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>{employee.Empleado_id}</td>
-                  <td>{employee.Nombre}</td>
-                  <td>{employee.Apellido}</td>
-                  <td>{employee.Cedula}</td>
-                  <td>{employee.Area}</td>
-                  <td>{employee.Cargo}</td>
-                </tr>
-              </tbody>
-            </table>
+            <DataTable
+              value={[employee]}
+              className="employee-datatable compact-table"
+            >
+              <Column field="Cedula" header="Documento de identidad" />
+              <Column field='Nombre' header="Nombre" />
+              <Column field='Apellido' header="Apellido" />
+              <Column field='Cargo' header="Cargo" />
+              <Column field='Area' header="Area" />
+
+            </DataTable>
           </div>
         </div>
       )}

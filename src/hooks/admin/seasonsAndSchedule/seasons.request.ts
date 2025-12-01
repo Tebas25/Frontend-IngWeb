@@ -1,5 +1,6 @@
 import axios from "axios";
 import type { ReturnSeasons, Season } from "../admin";
+import type  {AssingSchedule}  from "./schedule";
 
 const API_BASE = "http://localhost:8000/admin/horario";
 
@@ -21,5 +22,11 @@ export const fetchGetAllSeasons = async (): Promise<ReturnSeasons[]> => {
 
 export const createSeason = async (season: Season) => {
     const response = await axios.post(`${API_BASE}/ingresar-temporada`, season);
+    return response.data;
+}
+
+
+export const assingSchedule = async(schedule: AssingSchedule) => {
+    const response = await axios.post(`${API_BASE}/asignar-horario`, schedule)
     return response.data;
 }

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import Layout from "../../components/layout.component";
-import { useAllSeason } from "../../hooks/admin/seasons/useAllSeasons";
+import { useAllSeason } from "../../hooks/admin/seasonsAndSchedule/useAllSeasons";
 import "../../styles/seasons.css";
-import { useCreateSeason } from "../../hooks/admin/seasons/useCreateSeason";
+import { useCreateSeason } from "../../hooks/admin/seasonsAndSchedule/useCreateSeason";
 import Modal from "../../components/modal";
 import { SeasonForm } from "./NewSeasonPage";
 import { UserForm } from "../Administration/UserForm";
