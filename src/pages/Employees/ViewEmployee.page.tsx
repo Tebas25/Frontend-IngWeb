@@ -22,9 +22,7 @@ const ViewEmployeePage = () => {
 
     // --- LÓGICA DEL REPORTE ---
     const [startDate, setStartDate] = useState(""); 
-    // Nota: Eliminamos endDate porque ya no lo necesitas
     
-    // Importamos el hook de reporte
     const { fetchReporte, reporte, loadingReporte } = useReporte();
     const [isReportModalOpen, setIsReportModalOpen] = useState(false);
 
@@ -39,21 +37,16 @@ const ViewEmployeePage = () => {
         }
 
         console.log("Generando reporte para:", { cedula, startDate });
-        
-        // Llamamos a la API usando la cédula de la URL y la fecha del input
+
         await fetchReporte({
             Cedula: cedula,
             Fecha_inicio: startDate
         });
-
-        // Si la petición es exitosa (podrías validar si reporte no es null en un useEffect, 
-        // pero por simplicidad abrimos el modal aquí)
         setIsReportModalOpen(true);
     };
 
     const closeReportModal = () => {
         setIsReportModalOpen(false);
-        // Opcional: clearReporte(); si quieres limpiar los datos al cerrar
     };
 
 
