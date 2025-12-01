@@ -1,11 +1,11 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { GetEmployeeSalary } from "./employees.request";
 
 interface ReturnUseSalaryEmployee {
     salary: number | null;
     loadingSalary: boolean;
     SalaryError: string | null;
-    refetchSalary: (cedula: string ) => Promise<void>
+    refetchSalary: (cedula: string) => Promise<void>
 }
 
 export const useSalaryEmployee = (cedula: string): ReturnUseSalaryEmployee => {
@@ -13,12 +13,12 @@ export const useSalaryEmployee = (cedula: string): ReturnUseSalaryEmployee => {
     const [salary, setSalary] = useState<number | null>(null);
     const [SalaryError, setError] = useState<string | null>(null);
 
-    const getSalary = useCallback(async(cedula: string) => {
+    const getSalary = useCallback(async (targetCedula: string) => {
         setLoadingSalary(true);
         setError(null);
 
         try {
-            const result = await GetEmployeeSalary(cedula.trim());
+            const result = await GetEmployeeSalary(targetCedula.trim());
             setSalary(result);
         } catch (error: any) {
             setSalary(null);
@@ -28,8 +28,14 @@ export const useSalaryEmployee = (cedula: string): ReturnUseSalaryEmployee => {
         }
     }, []);
 
-    const refetchSalary = async (cedula: string) => {
-        await getSalary(cedula);
+    useEffect(() => {
+        if (cedula) {
+            getSalary(cedula); 
+        }
+    }, [cedula, getSalary]);
+
+    const refetchSalary = async (targetCedula: string) => {
+        await getSalary(targetCedula);
     }
 
     return {
